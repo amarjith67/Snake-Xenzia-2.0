@@ -46,6 +46,9 @@ getFood()
 
 //score
 let score = 0
+init()
+
+let highScore = 0
 
 // direction
 let dir =""
@@ -152,8 +155,14 @@ function render(){
   //level indicator
   let levelText = lvl>0? `LEVEL: ${lvl}`:"LEVEL: 0"
   ctx.fillStyle = "yellow"
-  ctx.font ="40px tahoma"
+  ctx.font ="35px tahoma"
   ctx.fillText(levelText,canvasSize-170,40)
+
+  // hs indicator
+  highscore(score);
+  ctx.fillStyle = "green"
+  ctx.font ="35px tahoma"
+  ctx.fillText(`HSCORE: ${localStorage.getItem("score")}`,canvasSize-430,40)
 }
 }
 
@@ -176,6 +185,22 @@ function levels(score){
 
 game = setInterval(render,level);
 
+//localStorage initialisation
+function init(){
+    if(localStorage.getItem("score") === null){
+        localStorage.setItem("score",0);
+    }
+}
+
+// highscore logic
+function highscore(score){
+    let old_score = localStorage.getItem("score");
+    if (score>old_score){
+        localStorage.setItem("score",score)
+    }
+}
+
+
 
 function gameOver(){
     clearInterval(game);
@@ -184,5 +209,4 @@ function gameOver(){
     ctx.font ="40px tahoma"
     ctx.fillText("Game Over!",canvasSize/2-100,canvasSize/2)
 }
-
 
