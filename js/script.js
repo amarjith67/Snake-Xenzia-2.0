@@ -10,7 +10,8 @@ canvas.focus()
 // canvas.background = "grey"
 let isPaused = false;
 
-let level = 200;
+let level = 250;
+let game;
 const snakeBox = 20
 const totalMoves = canvasSize/snakeBox;
 
@@ -18,7 +19,7 @@ const apple = new Image()
 apple.src = "../images/apple.png"
 
 //audio
-
+let lvl=0;
 let dead = new Audio()
 let up = new Audio()
 let down = new Audio()
@@ -132,32 +133,49 @@ function render(){
   
    //level
    levels(score);
+//   console.log(lvl)
+   
+  
 
-   //gameover logic
   if(snakeX<0 || snakeY<0 || snakeX>=canvasSize || snakeY>=canvasSize){
     gameOver();
     return;
   }
   snakeCollison(newHead,snake);
   
-
   snake.unshift(newHead)
-
+  
   ctx.fillStyle = "red"
   ctx.font = "40px tahoma"
   ctx.fillText(score,10,40)
+
+  //level indicator
+  let levelText = lvl>0? `LEVEL: ${lvl}`:"LEVEL: 0"
+  ctx.fillStyle = "yellow"
+  ctx.font ="40px tahoma"
+  ctx.fillText(levelText,canvasSize-170,40)
 }
 }
 
-render();
-let game = setInterval(render,level);
-
+let prev_score = 0
 function levels(score){
-if(score%5 == 0 && level!=100 && score!=0){
-    level-=50
-    console.log(level)
+    clearInterval(game)
+    if (score>0 && score!=prev_score ){
+        if(score%3 == 0 && level>100){
+            level-=50
+            lvl++;
+            prev_score = score
+            console.log(level)
+        }
+    }
+
+    //reinitialising the interval with new level values
+    game =  setInterval(render,level)
+
 }
-}
+
+game = setInterval(render,level);
+
 
 function gameOver(){
     clearInterval(game);
