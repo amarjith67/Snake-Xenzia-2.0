@@ -28,7 +28,7 @@ h3{
     border: 1px solid black;
     /* font: 'Press Start 2P'; */
 }
-/* 
-#canvas:focus{
-    border: 1px solid black;
-} */
+
+ .swal2-title{
+    color: #fa0101 !important;
+}
