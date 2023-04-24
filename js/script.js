@@ -52,29 +52,33 @@ let highScore = 0;
 
 // direction
 let dir = "";
-canvas.addEventListener("keydown", (event) => {
-  // if(event.key="Space") console.log("hii",event.key)
 
-  if (event.key == "ArrowLeft" && dir != "ArrowRight") {
-    dir = "ArrowLeft";
-    left.play();
-  } else if (event.key == "ArrowUp" && dir !== "ArrowDown") {
-    dir = "ArrowUp";
-    up.play();
-  } else if (event.key == "ArrowRight" && dir !== "ArrowLeft") {
-    dir = "ArrowRight";
-    right.play();
-  } else if (event.key == "ArrowDown" && dir != "ArrowUp") {
-    dir = "ArrowDown";
-    down.play();
-  }
-  //pause logic
-  else if (event.key == "p" && isPaused == false) {
-    isPaused = true;
-  } else if (event.key == "p" && isPaused == true) {
-    isPaused = false;
-  }
-});
+["keydown","click"].forEach((e)=>{
+
+    canvas.addEventListener(e, (event) => {
+      // if(event.key="Space") console.log("hii",event.key)
+    
+      if (event.key == "ArrowLeft" && dir != "ArrowRight") {
+        dir = "ArrowLeft";
+        left.play();
+      } else if (event.key == "ArrowUp" && dir !== "ArrowDown") {
+        dir = "ArrowUp";
+        up.play();
+      } else if (event.key == "ArrowRight" && dir !== "ArrowLeft") {
+        dir = "ArrowRight";
+        right.play();
+      } else if (event.key == "ArrowDown" && dir != "ArrowUp") {
+        dir = "ArrowDown";
+        down.play();
+      }
+      //pause logic
+      else if (event.key == "p" && isPaused == false) {
+        isPaused = true;
+      } else if (event.key == "p" && isPaused == true) {
+        isPaused = false;
+      }
+    });
+})
 
 function snakeCollison(head, ar) {
   ar.forEach((item) => {
