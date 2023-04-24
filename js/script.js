@@ -2,6 +2,7 @@ let canvas = document.getElementById('canvas');
 /** @type {CanvasRenderingContext2D} */  //important
 let ctx = canvas.getContext("2d")
 
+
 const canvasSize = 600;
 canvas.height = canvasSize
 canvas.width  = canvasSize
@@ -149,20 +150,20 @@ function render(){
   snake.unshift(newHead)
   
   ctx.fillStyle = "red"
-  ctx.font = "40px tahoma"
+  ctx.font = "bold 30px 'Press Start 2P'"
   ctx.fillText(score,10,40)
 
   //level indicator
   let levelText = lvl>0? `LEVEL: ${lvl}`:"LEVEL: 0"
   ctx.fillStyle = "yellow"
-  ctx.font ="35px tahoma"
-  ctx.fillText(levelText,canvasSize-170,40)
+  ctx.font ="20px 'Press Start 2P'"
+  ctx.fillText(levelText,canvasSize-170,30)
 
   // hs indicator
   highscore(score);
   ctx.fillStyle = "green"
-  ctx.font ="35px tahoma"
-  ctx.fillText(`HSCORE: ${localStorage.getItem("score")}`,canvasSize-430,40)
+  ctx.font ="20px 'Press Start 2P'"
+  ctx.fillText(`HSCORE: ${localStorage.getItem("score")}`,canvasSize-430,30)
 }
 }
 
@@ -182,6 +183,7 @@ function levels(score){
     game =  setInterval(render,level)
 
 }
+
 
 game = setInterval(render,level);
 
@@ -206,7 +208,7 @@ function gameOver(){
     clearInterval(game);
     dead.play();
     ctx.fillStyle = "white"
-    ctx.font ="40px tahoma"
-    ctx.fillText("Game Over!",canvasSize/2-100,canvasSize/2)
+    ctx.font ="30px 'Press Start 2P'"
+    ctx.fillText("Game Over!",canvasSize/2-120,canvasSize/2)
 }
 
